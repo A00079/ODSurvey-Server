@@ -6,8 +6,6 @@ const app = express();
 const path = require('path');
 const port = process.env.PORT || 5000;
 
-const GenerateExcelAndSendEmail = require('./routes/GenerateAndEmailExcelFile/genexcel.routes');
-
 // Middlewares
 app.use(cors());
 // parse application/x-www-form-urlencoded
@@ -18,8 +16,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 
+const GenerateExcelAndSendEmail = require('./routes/GenerateAndEmailExcelFile/genexcel.routes');
+const CreatePassengersSurvey = require('./routes/PassengersSurvey/passengerssurvey.routes');
+const CreateGoodsSurvey = require('./routes/GoodsSurvey/goodssurvey.routes');
+
+
 // Routes
-app.use('/api/v1/odsurvey/passengers', GenerateExcelAndSendEmail);
+app.use('/api/v1/odsurvey/excelsheet', GenerateExcelAndSendEmail);
+app.use('/api/v1/odsurvey/passengers', CreatePassengersSurvey);
+app.use('/api/v1/odsurvey/goods', CreateGoodsSurvey);
+
 
 if (process.env.NODE_ENV === 'production') {
 
