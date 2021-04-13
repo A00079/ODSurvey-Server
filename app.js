@@ -17,15 +17,15 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 
 const GenerateExcelAndSendEmail = require('./routes/GenerateAndEmailExcelFile/genexcel.routes');
+const DeleteSurveyorsData = require('./routes/DeleteSurveyorsData/deletesurveyourdata.routes');
 const CreatePassengersSurvey = require('./routes/PassengersSurvey/passengerssurvey.routes');
 const CreateGoodsSurvey = require('./routes/GoodsSurvey/goodssurvey.routes');
-
 
 // Routes
 app.use('/api/v1/odsurvey/excelsheet', GenerateExcelAndSendEmail);
 app.use('/api/v1/odsurvey/passengers', CreatePassengersSurvey);
+app.use('/api/v1/odsurvey/suryours/data', DeleteSurveyorsData);
 app.use('/api/v1/odsurvey/goods', CreateGoodsSurvey);
-
 
 if (process.env.NODE_ENV === 'production') {
 
